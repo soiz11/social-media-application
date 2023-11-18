@@ -7,8 +7,12 @@ import UserBlogs from './pages/UserBlogs'
 import BlogDetail from './pages/BlogDetail'
 import AddBlog from './pages/AddBlog'
 import Header from './components/Header'
+import { useSelector } from 'react-redux';
+
 
 const App = () => {
+  const isLoggedIn = useSelector(state=>state.isLoggedIn);
+  console.log(isLoggedIn);
   return (
    <>
    <BrowserRouter>
