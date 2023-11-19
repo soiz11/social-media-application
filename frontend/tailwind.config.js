@@ -28,7 +28,12 @@ export default {
       // => @media (max-width: 767px) { ... }
 
       'sm': {'max': '639px'},
-      }
+      },
+
+      boxShadow: {
+        custom: '2px 2px 15px rgba(0, 0, 0, 0.1), -2px -2px 15px rgba(0, 0, 0, 0.05)',
+        
+      },
     },
   },
   plugins: [],

@@ -1,8 +1,15 @@
 import React, { useState,useEffect } from 'react'
 import patimg from "../images/pattern.jpg";
 import briimg from "../images/brick.jpg";
+import axios from "axios";
+import { useDispatch } from "react-redux"
+import { authActions } from '../Store';
+import { useNavigate } from 'react-router-dom';
+
 
 const Auth = () => {
+   const navigate = useNavigate();
+   const dispatch = useDispatch();
    const [isSignUp, setIsSignUp] =useState(false);
    const [inputs, setInputs] = useState({
     name:"",
@@ -15,9 +22,29 @@ const Auth = () => {
       [e.target.name]:e.target.value,
     }))
    }
+
+   const sendRequest = async(type="login") =>{
+   const res = await axios.post(`http://localhost:5000/api/user/${type}`,{
+      name:inputs.name,
+      email:inputs.email,
+      password:inputs.password
+    }).catch((e)=> {
+      console.log(e)
+    });
+
+    const data = await res.data;
+    return data;
+   }
+
    const handleSubmit = (e)=>{
     e.preventDefault();
     console.log(inputs)
+    if(isSignUp){
+      sendRequest("signup").then(()=>dispatch(authActions.login())).then(()=>{navigate("/blogs")}).then(data=>{console.log(data)});
+    }
+    else{
+      sendRequest().then(()=>dispatch(authActions.login())).then(()=>{navigate("/blogs")}).then(data=>{console.log(data)});
+    }
    }
    
   {/*/const [currentImage, setCurrentImage] = useState(0);

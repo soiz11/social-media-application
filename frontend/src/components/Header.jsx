@@ -1,8 +1,11 @@
 import React, { useState } from 'react'
 import {Link} from "react-router-dom"
 import { useSelector } from 'react-redux';
+import { useDispatch } from "react-redux"
+import { authActions } from '../Store';
 
 const Header = () => {
+  const dispatch = useDispatch();
   const [isAllBlogActive, setIsAllBlogActive] = useState(true);
   const [isMyBlogActive, setIsMyBlogActive] = useState(false);
   const isLoggedIn = useSelector(state=>state.isLoggedIn);
@@ -39,7 +42,7 @@ const Header = () => {
                 }
                 
                 { isLoggedIn &&
-                  <Link className='border-[2px] border-transparent hover:border-solid hover:border-[2px] hover:border-red-700  text-black hover:text-red-700 h-full items-center flex mx-1 px-6  lg:px-4 rounded-smtext-lg md:text-sm font-medium duration-500 '  to="/auth">Logout</Link>
+                  <Link onClick={()=>dispatch(authActions.logout())} className='border-[2px] border-transparent hover:border-solid hover:border-[2px] hover:border-red-700  text-black hover:text-red-700 h-full items-center flex mx-1 px-6  lg:px-4 rounded-smtext-lg md:text-sm font-medium duration-500 '  to="/">Logout</Link>
                   }
             </div>
         </div>

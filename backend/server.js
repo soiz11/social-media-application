@@ -4,6 +4,7 @@
 
 import express from "express";
 import mongoose from "mongoose";
+import cors from "cors";
 import router from "./routes/user-routes";
 import blogrouter from "./routes/blog-routes";
 
@@ -14,6 +15,7 @@ const PORT = 5000;
 // app.use("/",(req,res)=>{
 //     res.send("hello");
 // })
+app.use(cors());
 app.use(express.json());
 app.use("/api/user",router);
 app.use("/api/blog",blogrouter);
